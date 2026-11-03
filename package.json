@@ -1,0 +1,14 @@
+{
+  "name": "reservafacil",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MVP local de reservas para un restaurante, sin dependencias.",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node server.mjs",
+    "test": "node --test --test-isolation=none",
+    "check": "node --check app.js && node --check domain.js && node --check storage.js && node --check server.mjs"
+  },
+  "engines": { "node": ">=22" }
+}

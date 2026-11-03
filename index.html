@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#244e42">
+  <meta name="description" content="ReservaFácil. Tu próxima mesa, sin vueltas. Prototipo local de reservas de restaurante.">
+  <title>ReservaFácil · Una mesa te espera</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Ir al contenido</a>
+  <aside class="sidebar">
+    <a class="brand" href="#reservar" aria-label="ReservaFácil, inicio"><img src="./favicon.svg" width="38" height="38" alt=""><span>reserva<span class="brand-light">fácil</span><span class="brand-dot">.</span></span></a>
+    <div class="sidebar-section">TU PRÓXIMA MESA</div>
+    <nav aria-label="Navegación principal">
+      <a href="#reservar" data-view="reservar"><span class="nav-icon" aria-hidden="true">＋</span><span>Nueva reserva</span><span class="nav-arrow" aria-hidden="true">↗</span></a>
+      <a href="#mi-reserva" data-view="mi-reserva"><span class="nav-icon" aria-hidden="true">⌕</span><span>Mi reserva</span></a>
+      <a href="#gestion" data-view="gestion"><span class="nav-icon" aria-hidden="true">▦</span><span>Gestión</span><span class="tiny-tag">DEMO</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="little-flower" aria-hidden="true">✳</div>
+      <p>Lo mejor de la mesa<br>es compartirla.</p>
+      <div class="sidebar-note"><span class="status-dot"></span> Prototipo local <span>v0.1</span></div>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="restaurant-mark"><span class="restaurant-icon" aria-hidden="true">⌂</span><div>EL RESTAURANTE<span>Buenos momentos, buena compañía.</span></div></div>
+      <div class="topbar-status"><span class="status-dot"></span> Reservas todos los días</div>
+    </header>
+    <main id="main" tabindex="-1">
+      <div id="storage-alert" class="alert danger" role="alert" hidden><div><strong>No podemos acceder a tus reservas</strong><p id="storage-message"></p></div><button class="button secondary small" id="retry-storage">Volver a intentar</button></div>
+
+      <section id="view-reservar" class="view" aria-labelledby="booking-title">
+        <div class="page-heading booking-heading"><div><p class="eyebrow"><span></span> UN LUGAR PARA VOS</p><h1 id="booking-title">Los buenos momentos<br>empiezan con una mesa<span class="accent">.</span></h1><p class="subtitle">Elegí cuándo venir. Nosotros te hacemos lugar.</p></div><div class="table-art" aria-hidden="true"><svg viewBox="0 0 220 150"><path d="M34 98c17-49 52-76 97-68 39 7 49 43 49 43" fill="none" stroke="#d8ddc9" stroke-width="1.5" stroke-dasharray="4 5"/><ellipse cx="112" cy="85" rx="64" ry="39" fill="#dbe1ce"/><ellipse cx="112" cy="78" rx="64" ry="39" fill="#eee9db" stroke="#c5ccb6" stroke-width="1.5"/><ellipse cx="112" cy="78" rx="24" ry="16" fill="#faf8f0" stroke="#b5bfac"/><ellipse cx="112" cy="78" rx="17" ry="11" fill="none" stroke="#cbd2bf"/><path d="M75 66v25m-4-25v10h8V66m66 3v22m-4-22c0-10 8-10 8 0s-8 10-8 0" stroke="#708672" fill="none" stroke-width="2" stroke-linecap="round"/><path d="m110 43 3-22m0 11c-13-1-14-12-14-12 12-3 14 12 14 12m-1-5c10-1 12-11 12-11-10-2-12 11-12 11" stroke="#496b50" fill="#b6c79d" stroke-width="2"/><rect x="40" y="112" width="43" height="10" rx="5" transform="rotate(25 40 112)" fill="#9bac8c"/><rect x="150" y="22" width="43" height="10" rx="5" transform="rotate(25 150 22)" fill="#9bac8c"/><path d="m185 103 2 7 7 2-7 2-2 7-2-7-7-2 7-2z" fill="#b8945b"/></svg></div></div>
+        <div class="booking-layout">
+          <section class="panel booking-panel" aria-label="Crear una reserva"><div class="panel-heading"><span class="step-number">01</span><div><h2>Reservá tu lugar</h2><p>Unos pocos datos y ya estás más cerca.</p></div><span class="panel-kicker">SIN VUELTAS</span></div><div id="booking-form-host"></div></section>
+          <aside class="booking-aside">
+            <section class="availability-card" aria-labelledby="availability-title"><div class="availability-top"><span class="eyebrow">HAY UN LUGAR PARA VOS</span><span aria-hidden="true">↗</span></div><h2 id="availability-title">Tu mesa te espera.</h2><p>Dos turnos. El mismo buen plan.</p><div id="slot-summary"></div><div class="availability-footer"><span aria-hidden="true">◷</span> Hasta 6 personas por reserva</div></section>
+            <section class="how-card"><span class="eyebrow">ASÍ DE SIMPLE</span><ol><li><span>01</span><div><strong>Elegí tu momento</strong><p>Una fecha, un turno y tu compañía.</p></div></li><li><span>02</span><div><strong>Guardá tu código</strong><p>Lo vas a necesitar para consultar.</p></div></li><li><span>03</span><div><strong>Disfrutá de la mesa</strong><p>Del resto te encargás cuando llegues.</p></div></li></ol></section>
+            <p class="local-note"><span aria-hidden="true">ⓘ</span> Esta es una demo. Las reservas se guardan solo en este navegador. Usá datos ficticios.</p>
+          </aside>
+        </div>
+        <div id="booking-success" class="panel success-panel" tabindex="-1" hidden></div>
+      </section>
+
+      <section id="view-mi-reserva" class="view" aria-labelledby="lookup-title" hidden>
+        <div class="page-heading"><p class="eyebrow"><span></span> TODO LISTO PARA ENCONTRARNOS</p><h1 id="lookup-title">Tu reserva, a mano<span class="accent">.</span></h1><p class="subtitle">Consultá los detalles o avisá si tus planes cambiaron.</p></div>
+        <div class="lookup-layout"><section class="panel"><div class="panel-heading"><span class="step-number">⌕</span><div><h2>Buscá tu reserva</h2><p>Ingresá los datos que usaste al reservar.</p></div></div><form id="lookup-form" class="form-content" novalidate><div class="field"><label for="lookup-code">Código de reserva</label><input id="lookup-code" name="codigo" type="text" required autocomplete="off" spellcheck="false" placeholder="Pegá tu código completo" aria-describedby="lookup-help"><small id="lookup-help">Lo recibiste al confirmar tu reserva.</small></div><div class="field"><label for="lookup-phone">Teléfono</label><input id="lookup-phone" name="telefono" type="tel" required autocomplete="tel" placeholder="Ej. 11 5555-1234"></div><p id="lookup-error" class="form-message error-message" role="alert" hidden></p><button class="button primary full-width" type="submit">Consultar reserva <span aria-hidden="true">↗</span></button></form></section><div id="lookup-result" class="lookup-result" aria-live="polite"><div class="empty-result"><span class="empty-symbol" aria-hidden="true">✳</span><h2>Acá vas a encontrar tu mesa.</h2><p>Tené a mano tu código y teléfono.<br>Un buen momento está por venir.</p></div></div></div>
+      </section>
+
+      <section id="view-gestion" class="view" aria-labelledby="manage-title" hidden>
+        <div class="page-heading manage-heading"><div><p class="eyebrow"><span></span> TODO EN SU LUGAR</p><h1 id="manage-title">La agenda de tu mesa<span class="accent">.</span></h1><p class="subtitle">Una mirada a las reservas. Más tiempo para recibir bien.</p></div><button id="manager-create" class="button primary">＋ Nueva reserva</button></div>
+        <div class="demo-banner"><span aria-hidden="true">ⓘ</span><p><strong>Vista de demostración.</strong> Acceso abierto, sin cuentas ni permisos. Solo muestra los datos de este navegador.</p></div>
+        <div class="stats-grid"><div class="stat"><span>Reservas confirmadas</span><strong id="stat-reservations">0</strong><small>En la fecha seleccionada</small></div><div class="stat"><span>Personas esperadas</span><strong id="stat-guests">0</strong><small>Entre ambos turnos</small></div><div class="stat"><span>Lugares disponibles</span><strong id="stat-places">40</strong><small id="stat-places-note">20 por turno</small></div></div>
+        <section class="panel manage-panel"><div class="management-toolbar"><div><h2>Reservas</h2><p id="list-count">Tu agenda empieza acá.</p></div><div class="filter-controls"><div class="field"><label for="filter-date">Filtrar por fecha</label><input id="filter-date" type="date"></div><button id="filter-all" class="button secondary small">Ver todas</button></div></div><div class="table-scroll"><table><caption class="sr-only">Listado de reservas, ordenado por fecha y turno</caption><thead><tr><th scope="col">Cliente / código</th><th scope="col">Fecha y turno</th><th scope="col">Personas</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead><tbody id="reservation-list"></tbody></table></div><div id="list-empty" class="empty-state"><span class="empty-symbol" aria-hidden="true">▦</span><h3>Una agenda lista para llenarse.</h3><p>Todavía no hay reservas para esta fecha.</p><button id="empty-create" class="button secondary">Crear la primera reserva <span aria-hidden="true">↗</span></button></div></section>
+      </section>
+      <footer class="footer"><span>Hecho para compartir buenos momentos.</span><span>ReservaFácil <span class="footer-dot">·</span> MVP local</span></footer>
+    </main>
+  </div>
+
+  <template id="booking-form-template"><form class="booking-form form-content" novalidate><fieldset><legend><span class="section-dot"></span> El plan</legend><div class="form-row"><div class="field"><label data-label="fecha">¿Qué día venís?</label><input name="fecha" type="date" required data-input="fecha"><small class="field-error" data-error="fecha"></small></div><div class="field"><label data-label="personas">¿Cuántos son?</label><select name="personas" data-input="personas"><option value="1">1 persona</option><option value="2" selected>2 personas</option><option value="3">3 personas</option><option value="4">4 personas</option><option value="5">5 personas</option><option value="6">6 personas</option></select><small class="field-error" data-error="personas"></small></div></div><fieldset class="slot-fieldset"><legend>Elegí tu turno</legend><div class="slot-options"><label class="slot-option"><input type="radio" name="turno" value="19:00" required><span class="slot-option-content"><span class="slot-time">19:00 <span>— 21:00</span></span><span class="slot-caption">Primer turno <span data-free="19:00"></span></span></span><span class="radio-mark"></span></label><label class="slot-option"><input type="radio" name="turno" value="21:00" required><span class="slot-option-content"><span class="slot-time">21:00 <span>— 23:00</span></span><span class="slot-caption">Segundo turno <span data-free="21:00"></span></span></span><span class="radio-mark"></span></label></div><small class="field-error" data-error="turno"></small></fieldset><p class="capacity-note" aria-live="polite"></p></fieldset><div class="form-divider"></div><fieldset><legend><span class="section-dot"></span> Tus datos</legend><div class="form-row"><div class="field"><label data-label="nombreCompleto">Nombre y apellido</label><input data-input="nombreCompleto" name="nombreCompleto" type="text" maxlength="80" required autocomplete="name" placeholder="Ej. Alex García"><small class="field-error" data-error="nombreCompleto"></small></div><div class="field"><label data-label="telefono">Teléfono</label><input data-input="telefono" name="telefono" type="tel" required autocomplete="tel" placeholder="Ej. 11 5555-1234"><small class="field-error" data-error="telefono"></small></div></div></fieldset><div class="form-bottom"><p class="form-message error-message" role="alert" hidden></p><button type="submit" class="button primary full-width submit-booking">Confirmar mi reserva <span aria-hidden="true">↗</span></button><p class="form-footnote">Sin pagos ni señas. Solo ganas de pasarla bien.</p></div></form></template>
+  <dialog id="editor-dialog" class="editor-dialog" aria-labelledby="editor-title"><div class="dialog-heading"><div><p class="eyebrow">LA AGENDA</p><h2 id="editor-title">Editar reserva</h2></div><button class="icon-button" id="close-editor" aria-label="Cerrar formulario">×</button></div><div id="editor-form-host"></div></dialog>
+  <dialog id="cancel-dialog" class="cancel-dialog" aria-labelledby="cancel-title" aria-describedby="cancel-description"><span class="cancel-symbol" aria-hidden="true">↗</span><h2 id="cancel-title">¿Cancelamos esta reserva?</h2><p id="cancel-description"></p><p class="muted">Se liberarán sus lugares. Esta acción no se puede deshacer.</p><p id="cancel-error" class="form-message error-message" role="alert" hidden></p><div class="dialog-actions"><button id="keep-reservation" class="button secondary" autofocus>Conservar reserva</button><button id="confirm-cancel" class="button destructive">Sí, cancelar</button></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <noscript><div class="noscript">Para usar ReservaFácil, habilitá JavaScript en tu navegador.</div></noscript>
+</body>
+</html>
